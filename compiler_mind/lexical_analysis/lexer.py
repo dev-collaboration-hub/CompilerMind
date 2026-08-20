@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from .errors import LexicalError
+from .rules import DEFAULT_IDENTIFIER_RULE, IdentifierRule
 from .tokens import Token, TokenKind
 
 
@@ -62,9 +63,11 @@ class Lexer:
         source: str,
         *,
         keywords: Iterable[str] = DEFAULT_KEYWORDS,
+        identifier_rule: IdentifierRule = DEFAULT_IDENTIFIER_RULE,
     ) -> None:
         self.source = source
         self.keywords = frozenset(keywords)
+        self.identifier_rule = identifier_rule
         self.index = 0
         self.line = 1
         self.column = 1
@@ -79,7 +82,7 @@ class Lexer:
                 self._consume_whitespace()
                 continue
 
-            if current.isalpha() or current == "_":
+            if self.identifier_rule.can_start(current):
                 tokens.append(self._scan_identifier_or_keyword())
                 continue
 
@@ -115,10 +118,7 @@ class Lexer:
         start = self.index
 
         self._advance()
-        while not self._at_end():
-            current = self._peek()
-            if not (current.isalnum() or current == "_"):
-                break
+        while not self._at_end() and self.identifier_rule.can_continue(self._peek()):
             self._advance()
 
         lexeme = self.source[start:self.index]
