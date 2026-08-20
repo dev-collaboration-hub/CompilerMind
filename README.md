@@ -224,8 +224,9 @@ Implemented on `main`:
 * M4 LL(1) table generation, predictive parsing, recursive-descent parsing, parse trees, syntax-error reporting, SLR(1) bottom-up parsing, parser-conflict hypotheses and lexer-to-parser terminal adaptation
 * M5 semantic AST, primitive type system, symbol tables, nested scopes, declaration/identifier validation, expression and assignment type checking, function signatures/calls, return checking and structured semantic diagnostics
 * M6 semantic-AST lowering, deterministic three-address code, canonical quadruples, derived triples, temporaries, labels/jumps, functions/calls/returns, basic blocks and control-flow graph construction
+* M7 deterministic fixed-point optimization pipeline with constant folding/propagation, copy propagation, local common-subexpression elimination, algebraic peephole simplification, control-flow cleanup, iterative dead-temporary elimination and per-pass optimization reports
 
-The next implementation milestone is M7 code optimization.
+The next implementation milestone is M8 target code generation.
 
 ## Long-Term Vision
 
