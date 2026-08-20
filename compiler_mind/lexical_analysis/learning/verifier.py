@@ -4,6 +4,7 @@ from collections.abc import Iterable
 
 from ..errors import LexicalError
 from ..lexer import Lexer
+from ..rules import DEFAULT_IDENTIFIER_RULE, IdentifierRule
 from .models import (
     ExpectedToken,
     LexicalTestCase,
@@ -15,9 +16,17 @@ from .models import (
 class LexicalVerifier:
     """Runs lexical experiments and compares expected behaviour with reality."""
 
-    def verify(self, case: LexicalTestCase) -> VerificationResult:
+    def verify(
+        self,
+        case: LexicalTestCase,
+        *,
+        identifier_rule: IdentifierRule = DEFAULT_IDENTIFIER_RULE,
+    ) -> VerificationResult:
         try:
-            tokens = Lexer(case.source).tokenize()
+            tokens = Lexer(
+                case.source,
+                identifier_rule=identifier_rule,
+            ).tokenize()
         except LexicalError as error:
             if case.expected_error_character is None:
                 return VerificationResult(
@@ -60,5 +69,15 @@ class LexicalVerifier:
             f"Token mismatch. expected={case.expected_tokens!r}, actual={actual!r}",
         )
 
-    def verify_all(self, cases: Iterable[LexicalTestCase]) -> VerificationReport:
-        return VerificationReport(tuple(self.verify(case) for case in cases))
+    def verify_all(
+        self,
+        cases: Iterable[LexicalTestCase],
+        *,
+        identifier_rule: IdentifierRule = DEFAULT_IDENTIFIER_RULE,
+    ) -> VerificationReport:
+        return VerificationReport(
+            tuple(
+                self.verify(case, identifier_rule=identifier_rule)
+                for case in cases
+            )
+        )
