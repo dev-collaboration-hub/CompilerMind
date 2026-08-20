@@ -217,7 +217,13 @@ End-to-end autonomous creation, analysis and improvement of small compilers.
 
 ## Project Status
 
-CompilerMind is currently in the architecture and research stage. Development will proceed from deterministic compiler algorithms toward a complete autonomous compiler-design agent.
+Implemented on `main`:
+
+* M2 lexical execution, verification and learning-by-doing loop
+* M3 grammar representation, FIRST/FOLLOW, left-recursion removal and left factoring
+* M4 LL(1) table generation, predictive parsing, recursive-descent parsing, parse trees, syntax-error reporting, SLR(1) bottom-up parsing, parser-conflict hypotheses and lexer-to-parser terminal adaptation
+
+The next implementation milestone is M5 semantic analysis.
 
 ## Long-Term Vision
 
