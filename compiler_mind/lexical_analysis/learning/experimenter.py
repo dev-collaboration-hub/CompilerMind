@@ -80,3 +80,10 @@ class LexicalExperimenter:
             )
             for index, identifier in enumerate(valid_identifiers, start=1)
         )
+
+    def identifier_learning_split(
+        self,
+    ) -> tuple[tuple[LexicalTestCase, ...], tuple[LexicalTestCase, ...]]:
+        discovery = self.identifier_suite(("a", "x2", "_temp"))
+        verification = self.identifier_suite(("abc_25", "__", "value9"))
+        return discovery, verification
