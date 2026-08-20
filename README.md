@@ -222,8 +222,9 @@ Implemented on `main`:
 * M2 lexical execution, verification and learning-by-doing loop
 * M3 grammar representation, FIRST/FOLLOW, left-recursion removal and left factoring
 * M4 LL(1) table generation, predictive parsing, recursive-descent parsing, parse trees, syntax-error reporting, SLR(1) bottom-up parsing, parser-conflict hypotheses and lexer-to-parser terminal adaptation
+* M5 semantic AST, primitive type system, symbol tables, nested scopes, declaration/identifier validation, expression and assignment type checking, function signatures/calls, return checking and structured semantic diagnostics
 
-The next implementation milestone is M5 semantic analysis.
+The next implementation milestone is M6 intermediate code generation.
 
 ## Long-Term Vision
 
